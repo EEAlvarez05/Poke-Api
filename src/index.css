@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+/* Theme */
+
+@theme {
+  /* Colors */
+  --color-primary: #1f1f1f;
+  --color-secondary: #2e2e2e;
+  --color-accent: #d1d1d1;
+
+  /* BreakPoint */
+  --breakpoint-sx: 400px;
+}
+
+/* Applying globals to html */
+
+body {
+  @apply h-screen w-screen overflow-hidden relative flex flex-col text-white bg-primary;
+}
+
+.icon {
+  @apply text-[20px];
+}
