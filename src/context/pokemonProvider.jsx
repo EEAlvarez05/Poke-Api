@@ -6,6 +6,7 @@ export const PokemonContext = createContext();
 export const PokemonProvider = ({ children }) => {
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
 
   //   Función para obtener los Pokémon
   const getPokemon = async () => {
@@ -27,8 +28,15 @@ export const PokemonProvider = ({ children }) => {
     getPokemon();
   }, []);
 
+  //   Busqueda de pokemon
+  const filteredBySearch = searchQuery
+    ? pokemon.filter((p) =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : pokemon;
+
   return (
-    <PokemonContext.Provider value={{ pokemon, loading }}>
+    <PokemonContext.Provider value={{ pokemon, loading, filteredBySearch, setSearchQuery }}>
       {children}
     </PokemonContext.Provider>
   );

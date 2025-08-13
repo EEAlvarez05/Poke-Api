@@ -1,10 +1,21 @@
 import Searching from "./Searching";
-import { useRef, useState } from "react";
+import { useRef, useState, useContext, useEffect } from "react";
+import { PokemonContext } from "../../context/pokemonProvider";
+import { useLocation } from "react-router-dom";
 
 function Search() {
+  const { setSearchQuery } = useContext(PokemonContext);
   const [search, setSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const desktopInputRef = useRef(null);
   const mobileInputRef = useRef(null);
+  const location = useLocation();
+
+  // Funcion para manejar el cambio en el input de busqueda
+  const handleChange = (e) => {
+    setSearchQuery(e.target.value);
+    setSearchValue(e.target.value);
+  };
 
   // Funcion para manejar el focus del input de busqueda
   const handleFocus = () => {
@@ -19,7 +30,15 @@ function Search() {
   // Funcion para manejar el back en mobile
   const handleBack = () => {
     setSearch(!search);
+    setSearchValue("");
+    setSearchQuery("");
   };
+
+  // Resetear búsqueda al cambiar de ruta
+  useEffect(() => {
+    setSearchQuery("");
+    setSearchValue("");
+  }, [location, setSearchQuery]);
 
   return (
     <div className="flex items-center justify-center md:w-full">
@@ -28,7 +47,12 @@ function Search() {
         onClick={handleFocus}
       >
         <i className="fa-solid fa-magnifying-glass icon hover:scale-110 transition duration-300 ease-in-out"></i>
-        <Searching className="w-full hidden md:block" ref={desktopInputRef} />
+        <Searching
+          className="w-full hidden md:block"
+          ref={desktopInputRef}
+          onChange={handleChange}
+          value={searchValue}
+        />
       </div>
       <div
         className={
@@ -40,7 +64,12 @@ function Search() {
           className="fa-solid fa-caret-left text-2xl cursor-pointer hover:scale-110 transition duration-300 ease-in-out"
           onClick={handleBack}
         ></i>
-        <Searching className="border-2 border-white p-1 w-11/12" ref={mobileInputRef} />
+        <Searching
+          className="border-2 border-white p-1 w-11/12"
+          ref={mobileInputRef}
+          onChange={handleChange}
+          value={searchValue}
+        />
       </div>
     </div>
   );
