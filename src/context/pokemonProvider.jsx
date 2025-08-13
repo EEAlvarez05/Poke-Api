@@ -7,8 +7,9 @@ export const PokemonProvider = ({ children }) => {
   const [pokemon, setPokemon] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [typeFilter, setTypeFilter] = useState("");
 
-  //   Función para obtener los Pokémon
+  // Función para obtener los Pokémon
   const getPokemon = async () => {
     try {
       const pokemonArray = [];
@@ -28,15 +29,34 @@ export const PokemonProvider = ({ children }) => {
     getPokemon();
   }, []);
 
-  //   Busqueda de pokemon
+  // Busqueda de pokemon
   const filteredBySearch = searchQuery
-    ? pokemon.filter((p) =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase())
+    ? pokemon.filter(
+        (p) =>
+          p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.id.toString().padStart(3, "0").includes(searchQuery)
       )
     : pokemon;
 
+  // Filtro por tipo
+  const filteredByType = typeFilter
+    ? filteredBySearch.filter((p) =>
+        p.types.some((t) => t.type.name === typeFilter)
+      )
+    : filteredBySearch;
+
   return (
-    <PokemonContext.Provider value={{ pokemon, loading, filteredBySearch, setSearchQuery }}>
+    <PokemonContext.Provider
+      value={{
+        pokemon,
+        loading,
+        filteredBySearch,
+        setSearchQuery,
+        filteredByType,
+        typeFilter,
+        setTypeFilter,
+      }}
+    >
       {children}
     </PokemonContext.Provider>
   );

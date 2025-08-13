@@ -6,7 +6,7 @@ import formatedPokemon from "../../utils/pokeHelpers";
 import NotFound from "../common/NotFound";
 
 function MainContent() {
-  const { filteredBySearch: pokemon, loading } = useContext(PokemonContext);
+  const { filteredByType: pokemon, loading } = useContext(PokemonContext);
 
   return (
     <main className="mx-2 mb-2 sx:mx-4 sx:mb-4 md:mx-6 md:mb-6 overflow-y-auto h-full main">
