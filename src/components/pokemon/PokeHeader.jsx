@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import pokeball from "../../assets/images/pokeball.svg";
 import { PokemonContext } from "../../context/pokemonProvider";
-import formatPokemon from "../../utils/pokeHelpers";
+import infoPokemon from "../../utils/pokeInfo";
 
 function PokeHeader() {
   const { pokemonDetails } = useContext(PokemonContext);
-  const formatted = formatPokemon(pokemonDetails);
+  const info = infoPokemon(pokemonDetails);
 
   return (
     <header className="flex flex-col items-center px-5 pt-5 gap-5 relative">
@@ -16,7 +16,7 @@ function PokeHeader() {
             <i className="fa-solid fa-arrow-left mt-1 icon hover:scale-120 transition duration-300 ease-in-out"></i>
           </Link>
           <h1 className="text-2xl md:text-3xl font-bold">
-            {formatted.name}
+            {info.name}
           </h1>
           <img
             src={pokeball}
@@ -24,11 +24,11 @@ function PokeHeader() {
             className="size-7 md:mt-1"
           />
         </div>
-        <p className="text-2xl md:text-3xl font-bold">#{formatted.id}</p>
+        <p className="text-2xl md:text-3xl font-bold">#{info.id}</p>
       </div>
       <div className="size-[200px] relative top-11">
         <img
-          src={formatted.image}
+          src={info.image}
           alt="imagen de pokemon"
           className="block z-10 relative hover:scale-105 transition duration-500 ease-in-out"
         />

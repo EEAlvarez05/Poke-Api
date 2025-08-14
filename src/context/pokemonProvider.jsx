@@ -52,11 +52,18 @@ export const PokemonProvider = ({ children }) => {
     setDetailsLoading(true);
     setPokemonDetails(null);
     try {
-      const [pokemonRes] = await Promise.all([
+      const [pokemonRes, speciesRes] = await Promise.all([
         axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`),
+        axios.get(`https://pokeapi.co/api/v2/pokemon-species/${name}`),
       ]);
 
-      const data = pokemonRes.data;
+      const entries = speciesRes.data.flavor_text_entries.filter((entry) => entry.language.name === "en");
+      const description = entries[10]
+
+      const data = {
+        ...pokemonRes.data,
+        description
+      }
 
       setPokemonDetails(data);
     } catch (error) {

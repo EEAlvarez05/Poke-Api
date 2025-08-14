@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import typeColors from "../../utils/typeColors";
 import hexToRGBA from "../../utils/hexToRGBA";
 
 function Card({ image, name = "", id = "", type = "" }) {
-  const mainColor = typeColors[type] || "#d1d1d1";
+  const mainColor = type || "#d1d1d1";
   const transparentColor = hexToRGBA(mainColor, 0.1);
   const gradient = `linear-gradient(135deg, ${transparentColor} 0%, #555 100%)`;
 

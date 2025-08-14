@@ -4,9 +4,15 @@ import typeColors from "../../utils/typeColors";
 import hexToRGBA from "../../utils/hexToRGBA";
 import PokeTypes from "./PokeTypes";
 import PokeData from "./PokeData";
+import PokeDescription from "./PokeDescription";
+import PokeStats from "./PokeStats";
+import infoPokemon from "../../utils/pokeInfo";
 
 function PokeMainContent() {
   const { pokemonDetails } = useContext(PokemonContext);
+  const info = infoPokemon(pokemonDetails);
+  // console.log(info);
+  
 
   const mainColor = typeColors[pokemonDetails.types[0].type.name];
   const transparentColor = hexToRGBA(mainColor, 0.4);
@@ -27,6 +33,9 @@ function PokeMainContent() {
       <PokeTypes />
       <h3 className="text-3xl">About</h3>
       <PokeData />
+      <PokeDescription />
+      <h3 className="text-3xl">Base Stats</h3>
+      <PokeStats />
     </main>
   );
 }

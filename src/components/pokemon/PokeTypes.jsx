@@ -1,15 +1,15 @@
 import { useContext } from "react";
 import { PokemonContext } from "../../context/pokemonProvider";
-import formatPokemon from "../../utils/pokeHelpers";
+import infoPokemon from "../../utils/pokeInfo";
 import typeColors from "../../utils/typeColors";
 
 function PokeTypes() {
   const { pokemonDetails } = useContext(PokemonContext);
-  const formatted = formatPokemon(pokemonDetails);
+  const info = infoPokemon(pokemonDetails);
 
   return (
     <div className="flex gap-4">
-      {formatted.types.map((t) => (
+      {info.types.map((t) => (
         <p
           key={t.rawName}
           className="py-1 px-5 rounded-full text-black"

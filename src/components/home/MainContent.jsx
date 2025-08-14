@@ -21,13 +21,14 @@ function MainContent() {
         <div className="grid grid-cols-[repeat(2,150px)] md:grid-cols-[repeat(3,150px)] lg:grid-cols-[repeat(4,170px)] gap-8 justify-center py-4">
           {pokemon.map((poke) => {
             const formatted = formatedPokemon(poke);
+
             return (
               <Card
                 key={formatted.id}
                 image={formatted.image}
                 name={formatted.name}
                 id={formatted.id}
-                type={formatted.types[0].rawName}
+                type={formatted.type.color}
               />
             );
           })}
