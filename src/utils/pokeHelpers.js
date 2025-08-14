@@ -11,6 +11,12 @@ function formatPokemon(poke) {
       const color = typeColors[rawName];
       return { rawName, name: displayName, color };
     }),
+    height: poke.height / 10,
+    weight: poke.weight / 10,
+    abilities: poke.moves.slice(0, 2).map((a)=>{
+      const name = a.move.name.charAt(0).toUpperCase() + a.move.name.slice(1).toLowerCase();
+      return {name}
+    })
   };
 }
 

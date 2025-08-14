@@ -2,6 +2,8 @@ import { useContext, useEffect } from "react";
 import { PokemonContext } from "../../context/pokemonProvider";
 import typeColors from "../../utils/typeColors";
 import hexToRGBA from "../../utils/hexToRGBA";
+import PokeTypes from "./PokeTypes";
+import PokeData from "./PokeData";
 
 function PokeMainContent() {
   const { pokemonDetails } = useContext(PokemonContext);
@@ -22,7 +24,9 @@ function PokeMainContent() {
     <main className="bg-white/10 flex flex-col items-center gap-8 py-11 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg" style={{
         backgroundImage: `linear-gradient(to top right, ${transparentColor}, transparent)`,
       }}>
-      PokeMainContent
+      <PokeTypes />
+      <h3 className="text-3xl">About</h3>
+      <PokeData />
     </main>
   );
 }
