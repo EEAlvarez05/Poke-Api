@@ -1,4 +1,4 @@
-import pokeball from "/public/pokeball.svg";
+import pokeball from "../../assets/images/pokeball.svg";
 function NotFound() {
   return (
     <div className="flex flex-col gap-8 items-center justify-center h-full">

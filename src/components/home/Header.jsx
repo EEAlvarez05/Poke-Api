@@ -1,4 +1,4 @@
-import pokeball from "/public/pokeball.svg"
+import pokeball from "../../assets/images/pokeball.svg";
 import Search from "./Search";
 import Filter from "./Filter";
 function Header() {

@@ -8,6 +8,8 @@ export const PokemonProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
+  const [pokemonDetails, setPokemonDetails] = useState(null);
+  const [detailsLoading, setDetailsLoading] = useState(true);
 
   // Función para obtener los Pokémon
   const getPokemon = async () => {
@@ -45,6 +47,25 @@ export const PokemonProvider = ({ children }) => {
       )
     : filteredBySearch;
 
+  // Funcion para obtener los detalles del pokemon
+  const getPokemonDetails = async (name) => {
+    setDetailsLoading(true);
+    setPokemonDetails(null);
+    try {
+      const [pokemonRes] = await Promise.all([
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`),
+      ]);
+
+      const data = pokemonRes.data;
+
+      setPokemonDetails(data);
+    } catch (error) {
+      console.error("Error al obtener los detalles del Pokémon:", error);
+    } finally {
+      setDetailsLoading(false);
+    }
+  };
+
   return (
     <PokemonContext.Provider
       value={{
@@ -55,6 +76,9 @@ export const PokemonProvider = ({ children }) => {
         filteredByType,
         typeFilter,
         setTypeFilter,
+        pokemonDetails,
+        detailsLoading,
+        getPokemonDetails,
       }}
     >
       {children}
