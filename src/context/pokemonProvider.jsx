@@ -57,13 +57,65 @@ export const PokemonProvider = ({ children }) => {
         axios.get(`https://pokeapi.co/api/v2/pokemon-species/${name}`),
       ]);
 
-      const entries = speciesRes.data.flavor_text_entries.filter((entry) => entry.language.name === "en");
-      const description = entries[10]
+      // Obtener la descripción
+      const entries = speciesRes.data.flavor_text_entries.filter(
+        (entry) => entry.language.name === "en"
+      );
+      const description = entries[10];
+
+      // Obtener la evolución
+      const evolutionUrl = speciesRes.data.evolution_chain.url;
+      const evolutionRes = await axios.get(evolutionUrl);
+      const evolutionChain = evolutionRes.data.chain;
+
+      // Funcion para recorrer la cadena de evoluccion
+      const getEvolution = async (node, evolvesFrom = null) => {
+        let evoData = [];
+
+        // Chequear generacion
+        const speciesInfo = await axios.get(node.species.url);
+        const isGen1 = speciesInfo.data.generation.name === "generation-i";
+
+        // Datos basicos
+        if (isGen1) {
+          const pokeRes = await axios.get(
+            `https://pokeapi.co/api/v2/pokemon/${node.species.name}`
+          );
+
+          // Detalles de evolucion
+          const evolutionDetails = node.evolution_details?.[0] || {};
+          const minLevel = evolutionDetails.min_level ?? null;
+          const item = evolutionDetails.item?.name ?? null;
+
+          // Agregar a la lista
+          evoData.push({
+            name: node.species.name,
+            image: pokeRes.data.sprites.other["official-artwork"].front_default,
+            minLevel,
+            item,
+            evolvesFrom,
+          });
+
+          // Recorrer todas las posibles evoluciones
+          for (let next of node.evolves_to) {
+            evoData.push(...(await getEvolution(next, node.species.name)));
+          }
+        } else {
+          for (const next of node.evolves_to) {
+            evoData.push(...(await getEvolution(next, evolvesFrom)));
+          }
+        }
+
+        return evoData;
+      };
+
+      const evolution = await getEvolution(evolutionChain);
 
       const data = {
         ...pokemonRes.data,
-        description
-      }
+        description,
+        evolution,
+      };
 
       setPokemonDetails(data);
     } catch (error) {

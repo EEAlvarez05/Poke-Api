@@ -6,13 +6,10 @@ import PokeTypes from "./PokeTypes";
 import PokeData from "./PokeData";
 import PokeDescription from "./PokeDescription";
 import PokeStats from "./PokeStats";
-import infoPokemon from "../../utils/pokeInfo";
+import PokeEvolution from "./PokeEvolution";
 
 function PokeMainContent() {
   const { pokemonDetails } = useContext(PokemonContext);
-  const info = infoPokemon(pokemonDetails);
-  // console.log(info);
-  
 
   const mainColor = typeColors[pokemonDetails.types[0].type.name];
   const transparentColor = hexToRGBA(mainColor, 0.4);
@@ -27,15 +24,24 @@ function PokeMainContent() {
   }, []);
 
   return (
-    <main className="bg-white/10 flex flex-col items-center gap-8 py-11 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg" style={{
+    <main
+      className="bg-white/10 flex flex-col items-center gap-8 py-11 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg"
+      style={{
         backgroundImage: `linear-gradient(to top right, ${transparentColor}, transparent)`,
-      }}>
+      }}
+    >
       <PokeTypes />
       <h3 className="text-3xl">About</h3>
       <PokeData />
       <PokeDescription />
       <h3 className="text-3xl">Base Stats</h3>
       <PokeStats />
+      {pokemonDetails.evolution && pokemonDetails.evolution.length > 1 ? (
+        <>
+          <h3 className="text-3xl">Evolutions</h3>
+          <PokeEvolution />
+        </>
+      ) : null}
     </main>
   );
 }

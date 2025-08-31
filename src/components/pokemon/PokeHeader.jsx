@@ -29,7 +29,7 @@ function PokeHeader() {
       <div className="size-[200px] relative top-11">
         <img
           src={info.image}
-          alt="imagen de pokemon"
+          alt={"imagen de " + info.name}
           className="block z-10 relative hover:scale-105 transition duration-500 ease-in-out"
         />
       </div>
