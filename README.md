@@ -1,12 +1,88 @@
-# React + Vite
+# 🧩 PokeApi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una Pokédex interactiva hecha con **React** y **TailwindCSS**.  
+Este proyecto forma parte de mi portfolio y utiliza la API pública de **PokeAPI** para mostrar y explorar Pokémon con filtros y búsqueda en tiempo real.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📸 Vista previa
 
-## Expanding the ESLint configuration
+<!-- Reemplazá esto con una captura de tu app -->
+![Preview](./src/assets/images/Preview.png)
+![Preview](./src/assets/images/Preview-2.png)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Demo
+
+[Poke-API](https://pokedexapi-psi.vercel.app)
+
+---
+
+## ✨ Funcionalidades
+
+- 🔎 Buscar Pokémon por nombre o número
+- 🔥 Filtrar por tipo (fuego, agua, planta, etc.)
+- 🎨 Interfaz responsive con diseño moderno
+- ⚡ Mostrar los primeros 151 Pokémon (Kanto)
+- 📋 Ver detalles completos de cada Pokémon (altura, peso, movimientos, etc.)
+- 🌀 Explorar la cadena de evoluciones de cada Pokémon
+
+---
+
+## 🛠️ Tecnologías usadas
+
+- ⚛️ React
+- 🎨 TailwindCSS
+- 🔗 PokeAPI
+
+---
+
+## 🧪 Instalación y ejecución local
+
+1. **Clonar el repositorio**
+
+```bash
+git clone https://github.com/EEAlvarez05/Poke-Api.git
+```
+
+2. **Instalar dependencias**
+
+```bash
+cd Poke-Api
+npm install
+```
+
+3. **Iniciar el servidor de desarollo**
+
+```bash
+npm run dev
+```
+
+4. **Abrí el nagevador y andá a:**
+
+localhost:5173 (o el puerto que te indique Vite)
+
+---
+
+## 🧑‍💻 Autor
+
+**Ezequiel Alvarez**
+
+🌐 [Portfolio](https://ezequiel-alvarez.vercel.app/)
+
+💼 [LinkedIn](https://www.linkedin.com/in/ezequiel-alvarez-16938729b/)
+
+---
+
+## 📌 Notas
+
+- El proyecto usa Vite para desarrollo rápido en React.
+- La API usada es completamente gratuita.
+- Este proyecto fue creado con fines educativos y para mostrar habilidades front-end.
+
+¡Gracias por visitar el repositorio! 😊
+Si te gustó, no dudes en dejar una ⭐ en GitHub.
+
+
+
